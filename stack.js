@@ -62,4 +62,52 @@ class Stack {
   }
 }
 
+// Browser Back/Forward Challenge
+
+const forwardStack = new Stack();
+const backStack = new Stack();
+let currSite;
+
+function goTo(site){
+    backStack.push(site);
+    console.log('Going to', site);
+    currSite = site;
+};
+
+function goBack(){
+    if(backStack.size > 1){
+        let forward = backStack.pop();
+        forwardStack.push(forward);
+        currSite = backStack.peek();
+        console.log('Going back to', currSite);
+    }else{
+        console.log('You are as far back as you can go')
+    }
+}
+
+function goFoward(){
+    if(!forwardStack.isEmpty()){
+        let back = forwardStack.pop();
+        backStack.push(back);
+        currSite = back;
+        console.log('Going forward to', currSite);
+    }else{
+        console.log('You are as far forward as you can go');
+    }
+}
+
+// String Reversal Challenge
+
+function reverseString(str){
+  let stringStack = new Stack();
+  for(let char of str){
+      stringStack.push(char);
+  };
+  let reversed = '';
+  for(let i = stringStack.size; i >= 0; i--){
+      reversed = reversed + stringStack.pop()
+  }
+  return reversed;
+}
+
 module.exports = Stack;
